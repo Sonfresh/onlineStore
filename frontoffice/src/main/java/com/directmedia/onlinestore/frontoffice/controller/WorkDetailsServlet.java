@@ -48,12 +48,16 @@ public class WorkDetailsServlet extends HttpServlet {
             out.println("<body>");
             for(Work work : Catalogue.listOfWorks) {
                 if(Long.parseLong(id) == work.getId()){
-                    out.println("<h5>" + work.getId() + "</h5>");
-                    out.println("<h5>" + work.getTitle() + "</h5>");
-                    out.println("<h5>" + work.getRelease() + "</h5>");
-                    out.println("<h5>" + work.getMainArtist().getName() + "</h5>");
-                    out.println("<h5>" + work.getGenre() + "</h5>");
-                    out.println("<h5>" + work.getSummary() + "</h5>");
+                    
+                    out.print("<div style='width:70%; margin:auto; text-align:center; margin-top:100px;'>");
+                    out.print("<img src='" + work.getUrlImg() +"' style='width:30%;'/>");
+                    out.print("<h4> Titre : " + work.getTitle() + "</h4>");
+                    out.print("<p> Année de réalisation : " + work.getRelease() +"</p>");
+                    out.print("<p> Acteur : " + work.getMainArtist().getName() +"</p>");
+                    out.print("<p> Genre : " + work.getGenre() +"</p>");
+                    out.print("<p> Description : "+work.getSummary()+"</p>");
+
+                    out.print("</div>");
                 }
             }
             out.println("</body>");
