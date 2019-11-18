@@ -16,6 +16,7 @@ public class Work {
     private int release;
     private String summary;
     private String urlImg;
+    private static int lastId;
     Artist mainArtist;
 
     public Work() {
@@ -26,14 +27,15 @@ public class Work {
             this.title = pTitle;
     }
 
-    public Work(long pId, String pTitle, int pRelease, Artist pMainArtist, String pGenre, String pSummary, String pUrlImg) {
-        this.id = pId;
+    public Work(String pTitle, int pRelease, Artist pMainArtist, String pGenre, String pSummary, String pUrlImg) {
         this.title = pTitle;
         this.release = pRelease;
         this.mainArtist = pMainArtist;
         this.genre = pGenre;
         this.summary = pSummary;
         this.urlImg = pUrlImg;
+        Work.lastId++;
+        this.id = Work.lastId;
     }
 
     public long getId() {

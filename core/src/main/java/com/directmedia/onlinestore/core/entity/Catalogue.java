@@ -5,6 +5,7 @@
  */
 package com.directmedia.onlinestore.core.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,5 +13,5 @@ import java.util.Set;
  * @author Administrator
  */
 public class Catalogue {
-    public static Set<Work> listOfWorks;
+    public static Set<Work> listOfWorks = new HashSet<>();
 }

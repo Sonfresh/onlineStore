@@ -5,6 +5,8 @@
  */
 package com.directmedia.onlinestore.backoffice.controller;
 
+import com.directmedia.onlinestore.core.entity.Catalogue;
+import com.directmedia.onlinestore.core.entity.Work;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,10 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Administrator
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "WorkDetailsServlet", urlPatterns = {"/work-details"})
+public class WorkDetailsServlet extends HttpServlet {
 
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,18 +35,31 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            String id = request.getParameter("id");
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Online Store</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
-            out.println("<a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>");
-            out.println("<a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a>");        
+            for(Work work : Catalogue.listOfWorks) {
+                if(Long.parseLong(id) == work.getId()){
+                    
+                    out.print("<div style='width:70%; margin:auto; text-align:center; margin-top:100px;'>");
+                    out.print("<img src='" + work.getUrlImg() +"' style='width:30%;'/>");
+                    out.print("<h4> Titre : " + work.getTitle() + "</h4>");
+                    out.print("<p> Année de réalisation : " + work.getRelease() +"</p>");
+                    out.print("<p> Acteur : " + work.getMainArtist().getName() +"</p>");
+                    out.print("<p> Genre : " + work.getGenre() +"</p>");
+                    out.print("<p> Description : "+work.getSummary()+"</p>");
+
+                    out.print("</div>");
+                }
+            }
             out.println("</body>");
             out.println("</html>");
         }
