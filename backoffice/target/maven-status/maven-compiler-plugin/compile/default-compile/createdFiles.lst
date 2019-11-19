@@ -1,3 +1,4 @@
+com\directmedia\onlinestore\backoffice\controller\AuthenticationServlet.class
 com\directmedia\onlinestore\backoffice\controller\HomeServlet.class
 com\directmedia\onlinestore\backoffice\controller\WorkDetailsServlet.class
 com\directmedia\onlinestore\backoffice\controller\AddWorkServlet.class
