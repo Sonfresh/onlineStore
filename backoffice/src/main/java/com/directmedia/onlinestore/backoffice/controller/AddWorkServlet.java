@@ -36,7 +36,21 @@ public class AddWorkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String title = request.getParameter("titreFilm");
+       
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         String title = request.getParameter("titreFilm");
         String annee = request.getParameter("annee");
         String genre = request.getParameter("genre");
         String resume = request.getParameter("resume");
@@ -61,20 +75,6 @@ public class AddWorkServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
     }
 
    
