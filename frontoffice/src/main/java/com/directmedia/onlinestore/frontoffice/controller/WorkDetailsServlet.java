@@ -49,13 +49,18 @@ public class WorkDetailsServlet extends HttpServlet {
             for(Work work : Catalogue.listOfWorks) {
                 if(Long.parseLong(id) == work.getId()){
                     
-                    out.print("<div style='width:70%; margin:auto; text-align:center; margin-top:100px;'>");
+                    out.print("<div style='width:50%; margin:auto; text-align:center; margin-top:100px;'>");
                     out.print("<img src='" + work.getUrlImg() +"' style='width:30%;'/>");
                     out.print("<h4> Titre : " + work.getTitle() + "</h4>");
                     out.print("<p> Année de réalisation : " + work.getRelease() +"</p>");
                     out.print("<p> Acteur : " + work.getMainArtist().getName() +"</p>");
                     out.print("<p> Genre : " + work.getGenre() +"</p>");
                     out.print("<p> Description : "+work.getSummary()+"</p>");
+                    
+                    out.print("<form action='addToCart' method='POST'>");
+                    out.print("<input type='hidden' name='identifiant' value='" + work.getId()+ "'/>");
+                    out.print("<input type=\"submit\" value=\"Ajouter au caddie\"/>");
+                    out.print("</form>");
 
                     out.print("</div>");
                 }
