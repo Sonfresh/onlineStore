@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,8 +48,10 @@ public class AuthenticationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String user = request.getParameter("user");
         String motDePasse  = request.getParameter("motDePasse");
+        session.setAttribute("identifiantUser", user);
         
         if((user.equals("michel") && motDePasse.equals("123456")) || (user.equals("caroline") && motDePasse.equals("abcdef"))){
             response.setContentType("text/html;charset=UTF-8");

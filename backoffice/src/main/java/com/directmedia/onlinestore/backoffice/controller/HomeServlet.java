@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,6 +35,8 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       HttpSession session = request.getSession();
+       String userName = (String)session.getAttribute("identifiantUser");
        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -44,8 +47,14 @@ public class HomeServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
-            out.println("<a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>");
-            out.println("<a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a>");        
+            if(!userName.isEmpty()){
+               
+                out.println("<h3>Bonjour " + userName +  "</h3>");
+                out.println("<a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>");
+                out.println("<a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a>");  
+            }else{
+                out.println("<a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>");
+            } 
             out.println("</body>");
             out.println("</html>");
         }
