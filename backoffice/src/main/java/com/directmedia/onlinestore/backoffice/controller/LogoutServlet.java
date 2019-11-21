@@ -12,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Administrator
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
+public class LogoutServlet extends HttpServlet {
 
     
 
@@ -35,29 +34,19 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
-       String userName = (String)session.getAttribute("identifiantUser");
-       response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Online Store</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
-            if(!userName.isEmpty()){
-               
-                out.println("<h3>Bonjour " + userName +  "<a href='http://localhost:8080/backoffice-1.0/logout'>(Déconnexion)</a></h3>");
-                out.println("<a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>");
-                out.println("<a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a>");  
-            }else{
-                out.println("<a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>");
-            } 
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getSession().invalidate();
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Online Store</title>");            
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
+
+        out.println("<h3>Vous avez été déconnecté, cliquez <a href='http://localhost:8080/backoffice-1.0/login.html'>ici</a> pour vous reconnecter à nouveau.</h3>");
+        out.println("</body>");
+        out.println("</html>");
     }
 
     /**
@@ -74,6 +63,5 @@ public class HomeServlet extends HttpServlet {
         
     }
 
-    
 
 }
