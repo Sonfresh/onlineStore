@@ -13,5 +13,15 @@ import java.util.Set;
  * @author Administrator
  */
 public class ShoppingCart {
-    public static Set<Work> items = new HashSet<>();
+    private Set<Work> items = new HashSet<>();
+
+    public Set<Work> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Work> items) {
+        this.items = items;
+    }
+    
+    
 }

@@ -37,7 +37,7 @@ public class WorkDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
         
        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+       /* try (PrintWriter out = response.getWriter()) {
             String id = request.getParameter("id");
             
             out.println("<!DOCTYPE html>");
@@ -67,7 +67,31 @@ public class WorkDetailsServlet extends HttpServlet {
             }
             out.println("</body>");
             out.println("</html>");
+        }*/
+        String id = request.getParameter("id");
+        Work work = null;
+        for(Work nextWork : Catalogue.listOfWorks) {
+            if(Long.parseLong(id) == nextWork.getId()){
+                work = nextWork;
+                break;
+            }
         }
+        PrintWriter out = response.getWriter();
+        out.print("<html><body><h1 style='text-align:center;'>Descriptif de l'oeuvre</h1>");
+        out.print("<div style='width:50%; margin:auto; text-align:center; margin-top:100px;'>");
+        out.print("<img src='" + work.getUrlImg() +"' style='width:30%;'/>");
+        out.print("<h4> Titre : " + work.getTitle() + "</h4>");
+        out.print("<p> Année de réalisation : " + work.getRelease() +"</p>");
+        out.print("<p> Acteur : " + work.getMainArtist().getName() +"</p>");
+        out.print("<p> Genre : " + work.getGenre() +"</p>");
+        out.print("<p> Description : "+work.getSummary()+"</p>");
+
+        out.print("<form action='addToCart' method='POST'>");
+        out.print("<input type='hidden' name='identifiant' value='" + work.getId()+ "'/>");
+        out.print("<input type=\"submit\" value=\"Ajouter au caddie\"/>");
+        out.print("</form>");
+
+        out.print("</div></body></html>");
     }
 
     /**

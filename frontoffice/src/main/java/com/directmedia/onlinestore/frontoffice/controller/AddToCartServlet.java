@@ -10,6 +10,7 @@ import com.directmedia.onlinestore.core.entity.ShoppingCart;
 import com.directmedia.onlinestore.core.entity.Work;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,7 +53,7 @@ public class AddToCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+       /* HttpSession session = request.getSession();
         String idWork = request.getParameter("identifiant");
         if(ShoppingCart.items.isEmpty()){
             for(Work work : Catalogue.listOfWorks){
@@ -69,11 +70,10 @@ public class AddToCartServlet extends HttpServlet {
                     session.setAttribute("caddie", ShoppingCart.items);
                 }
             }
-        }
+        }*/
         
-        response.setContentType("text/html;charset=UTF-8");
+        /*response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -84,7 +84,38 @@ public class AddToCartServlet extends HttpServlet {
             out.println("<a href='http://localhost:8080/frontoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a>");
             out.println("</body>");
             out.println("</html>");
+        }*/
+        
+        String idAsString = request.getParameter("identifiant");
+        long idAsLong = Long.parseLong(idAsString);
+        
+        ShoppingCart cart = (ShoppingCart)request.getSession().getAttribute("cart");
+        //On crée l'attribut de session cart si ce dernier n'existe pas
+        if(cart == null){
+            cart = new ShoppingCart();
+            request.getSession().setAttribute("cart", cart);
         }
+        
+        /*for(Work work : Catalogue.listOfWorks){
+            if(work.getId() == idAsLong){
+                cart.getItems().add(work);
+            }
+        }*/
+        
+        Optional<Work> optionalWork = Catalogue.listOfWorks.stream().filter(work -> work.getId() == idAsLong).findAny();
+        
+        if(optionalWork.isPresent()){
+            cart.getItems().add(optionalWork.get());
+        }
+        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<body>");
+        out.println("<h1>Œuvre ajoutée au caddie (" + cart.getItems().size() + ")</h1>");
+        out.println("<a href='http://localhost:8080/frontoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a>");
+        out.println("</body>");
+        out.println("</html>");
     }
 
 }
