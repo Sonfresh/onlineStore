@@ -35,6 +35,7 @@ public class WorkAddedSuccessServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String idOeuvre = (String)request.getAttribute("identifiantOeuvre");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -42,7 +43,7 @@ public class WorkAddedSuccessServlet extends HttpServlet {
             out.println("<html>");
             out.println("<body>");
             out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
-            out.println("<h3>L'oeuvre a été ajouté</h3>");
+            out.println("<h3>L'oeuvre a été ajouté, son identifiant est : " + idOeuvre + "</h3>");
             out.println("<a href='http://localhost:8080/backoffice-1.0/home'>Retourner à la page d'accueil</a>");      
             out.println("</body>");
             out.println("</html>");

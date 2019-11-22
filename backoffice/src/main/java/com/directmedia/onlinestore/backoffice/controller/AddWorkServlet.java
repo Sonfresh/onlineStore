@@ -98,6 +98,8 @@ public class AddWorkServlet extends HttpServlet {
         RequestDispatcher dispatcher = null;
         
         if(success){
+            String idAsString = String.valueOf(workAdd.getId());
+            request.setAttribute("identifiantOeuvre", idAsString);
             Catalogue.listOfWorks.add(workAdd);
             dispatcher = request.getRequestDispatcher("/success");
             dispatcher.forward(request, response);
