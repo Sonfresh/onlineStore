@@ -53,7 +53,7 @@ public class AddWorkServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
+        boolean success = true;
         String title = request.getParameter("titreFilm");
         String annee = request.getParameter("annee");
         String genre = request.getParameter("genre");
@@ -61,12 +61,19 @@ public class AddWorkServlet extends HttpServlet {
         String urlImg = request.getParameter("urlImg");
         String artist = request.getParameter("artist");
         
-        Work workAdd = null;
-        boolean doublonExist = false;
-        
+        Work workAddAnne = new Work();
         try{
-            workAdd = new Work(title, Integer.parseInt(annee), new Artist(artist), genre, resume, urlImg);
-            for(Work work : Catalogue.listOfWorks){
+            workAddAnne.setRelease(Integer.parseInt(annee));
+         }catch(NumberFormatException nfe){
+            success = false;
+            //RequestDispatcher dispatcher = request.getRequestDispatcher("/error");
+            //dispatcher.forward(request, response);
+        }
+        
+        
+        
+          Work  workAdd = new Work(title, workAddAnne.getRelease(), new Artist(artist), genre, resume, urlImg);
+           /* for(Work work : Catalogue.listOfWorks){
                 if(work.getTitle().equals(workAdd.getTitle()) && work.getRelease() == workAdd.getRelease()){
                     doublonExist = true; 
                     break;
@@ -80,9 +87,22 @@ public class AddWorkServlet extends HttpServlet {
                 Catalogue.listOfWorks.add(workAdd);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/success");
                 dispatcher.forward(request, response);
-            }
-        }catch(NumberFormatException nfe){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error");
+            }*/
+       
+        
+        Optional<Work> optionalWork = Catalogue.listOfWorks.stream().filter(work -> work.getTitle().equals(workAdd.getTitle()) && work.getRelease() == workAdd.getRelease()).findAny();
+        if(optionalWork.isPresent()){
+            success = false;
+        }
+        
+        RequestDispatcher dispatcher = null;
+        
+        if(success){
+            Catalogue.listOfWorks.add(workAdd);
+            dispatcher = request.getRequestDispatcher("/success");
+            dispatcher.forward(request, response);
+        }else{
+            dispatcher = request.getRequestDispatcher("/error");
             dispatcher.forward(request, response);
         }
         
