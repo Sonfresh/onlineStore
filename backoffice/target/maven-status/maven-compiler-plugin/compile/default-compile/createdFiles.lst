@@ -3,4 +3,6 @@ com\directmedia\onlinestore\backoffice\controller\HomeServlet.class
 com\directmedia\onlinestore\backoffice\controller\WorkDetailsServlet.class
 com\directmedia\onlinestore\backoffice\controller\AddWorkServlet.class
 com\directmedia\onlinestore\backoffice\controller\LogoutServlet.class
+com\directmedia\onlinestore\backoffice\controller\WorkAddedFailureServlet.class
 com\directmedia\onlinestore\backoffice\controller\CatalogueServlet.class
+com\directmedia\onlinestore\backoffice\controller\WorkAddedSuccessServlet.class

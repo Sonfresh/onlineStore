@@ -10,6 +10,8 @@ import com.directmedia.onlinestore.core.entity.Catalogue;
 import com.directmedia.onlinestore.core.entity.Work;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,31 +52,40 @@ public class AddWorkServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String title = request.getParameter("titreFilm");
+        
+        
+        String title = request.getParameter("titreFilm");
         String annee = request.getParameter("annee");
         String genre = request.getParameter("genre");
         String resume = request.getParameter("resume");
         String urlImg = request.getParameter("urlImg");
         String artist = request.getParameter("artist");
         
-        Work work = new Work(title, Integer.parseInt(annee), new Artist(artist), genre, resume, urlImg);
-        //Catalogue.listOfWorks = new HashSet<>();
-        Catalogue.listOfWorks.add(work);
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Online Store</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
-            out.println("<h3>Le film a été ajouté</h3>");
-            out.println("<a href='http://localhost:8080/backoffice-1.0/home'>Retourner à la page d'accueil</a>");       
-            out.println("</body>");
-            out.println("</html>");
+        Work workAdd = null;
+        boolean doublonExist = false;
+        
+        try{
+            workAdd = new Work(title, Integer.parseInt(annee), new Artist(artist), genre, resume, urlImg);
+            for(Work work : Catalogue.listOfWorks){
+                if(work.getTitle().equals(workAdd.getTitle()) && work.getRelease() == workAdd.getRelease()){
+                    doublonExist = true; 
+                    break;
+                }
+            }
+            
+            if(doublonExist){
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/error");
+                dispatcher.forward(request, response);
+            }else{
+                Catalogue.listOfWorks.add(workAdd);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/success");
+                dispatcher.forward(request, response);
+            }
+        }catch(NumberFormatException nfe){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error");
+            dispatcher.forward(request, response);
         }
+        
     }
 
    
