@@ -44,7 +44,7 @@ public class WorkAddedSuccessServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
             out.println("<h3>L'oeuvre a été ajouté, son identifiant est : " + idOeuvre + "</h3>");
-            out.println("<a href='http://localhost:8080/backoffice-1.0/home'>Retourner à la page d'accueil</a>");      
+            out.println("<a href='http://localhost:8080/backoffice-1.0/home.jsp'>Retourner à la page d'accueil</a>");      
             out.println("</body>");
             out.println("</html>");
         }

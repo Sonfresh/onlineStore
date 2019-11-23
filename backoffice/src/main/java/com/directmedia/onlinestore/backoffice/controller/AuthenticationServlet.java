@@ -64,7 +64,7 @@ public class AuthenticationServlet extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>OnlineStore - Gestion de la boutique</h1>");
-                out.println("<a href='http://localhost:8080/backoffice-1.0/home'>Page d'accueil</a>");       
+                out.println("<a href='http://localhost:8080/backoffice-1.0/home.jsp'>Page d'accueil</a>");       
                 out.println("</body>");
                 out.println("</html>");
             }
