@@ -55,7 +55,7 @@ public class CatalogueServlet extends HttpServlet {
             out.println("<body>");
             out.print("<h1 style='text-align: center; margin-top:100px;'> Catalogues </h1>");
             
-             for (Work work : Catalogue.listOfWorks) {
+            for (Work work : Catalogue.listOfWorks) {
                 out.print("<div style='width:25%; float:left; text-align:center; background:#efefef; padding:40px 0px; margin:2px;' >");
 
                 out.print("<img src='"+work.getUrlImg()+"' style='width:300px; height:200px;'/>");
