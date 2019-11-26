@@ -9,6 +9,7 @@ import com.directmedia.onlinestore.core.entity.Catalogue;
 import com.directmedia.onlinestore.core.entity.Work;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,7 @@ public class WorkDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       response.setContentType("text/html;charset=UTF-8");
+       //response.setContentType("text/html;charset=UTF-8");
        /* try (PrintWriter out = response.getWriter()) {
             String id = request.getParameter("id");
             
@@ -76,7 +77,10 @@ public class WorkDetailsServlet extends HttpServlet {
                 break;
             }
         }
-        PrintWriter out = response.getWriter();
+        request.setAttribute("work", work);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/work-details.jsp");
+        dispatcher.forward(request, response);
+        /*PrintWriter out = response.getWriter();
         out.print("<html><body><h1 style='text-align:center;'>Descriptif de l'oeuvre</h1>");
         out.print("<div style='width:50%; margin:auto; text-align:center; margin-top:100px;'>");
         out.print("<img src='" + work.getUrlImg() +"' style='width:30%;'/>");
@@ -91,7 +95,7 @@ public class WorkDetailsServlet extends HttpServlet {
         out.print("<input type=\"submit\" value=\"Ajouter au caddie\"/>");
         out.print("</form>");
 
-        out.print("</div></body></html>");
+        out.print("</div></body></html>");*/
     }
 
     /**
