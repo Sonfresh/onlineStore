@@ -18,12 +18,12 @@
             if(userName != null){
                 %>
                 <h3>Bonjour ${identifiantUser} <a href='http://localhost:8080/backoffice-1.0/logout'>(Déconnexion)</a></h3>
-                    <a href='http://localhost:8080/backoffice-1.0/catalogue.jsp'>Accès au catalogue des oeuvres</a><br/>
+                    <a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>
                     <a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a>
                 <%
             }else{
                 %>
-                    <a href='http://localhost:8080/backoffice-1.0/catalogue.jsp'>Accès au catalogue des oeuvres</a>
+                    <a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a>
                 <%
             }
         %>
