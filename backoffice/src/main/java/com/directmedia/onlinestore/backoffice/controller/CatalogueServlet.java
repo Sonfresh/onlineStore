@@ -46,7 +46,7 @@ public class CatalogueServlet extends HttpServlet {
         }
         
         request.setAttribute("catalogue", Catalogue.listOfWorks);
-        RequestDispatcher dispacther = request.getRequestDispatcher("/catalogue.jsp");
+        RequestDispatcher dispacther = request.getRequestDispatcher("/WEB-INF/catalogue.jsp");
         dispacther.forward(request, response);
         
       
