@@ -9,15 +9,9 @@
 <%@page import="com.directmedia.onlinestore.core.entity.Catalogue"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Online Store</title>
-    </head>
-    <body>
+
         
-        <h1 style='text-align: center; margin-top:100px;'> Catalogue </h1>
+        <h1 style='text-align: center; margin-top:100px;'> Catalogue des oeuvres </h1>
         <c:forEach items="${catalogue}" var="work">
             <div style='width:25%; float:left; text-align:center; background:#efefef; padding:40px 0px; margin:2px;' >
                 <img src="${work.urlImg}" style='width:300px; height:200px;'/>
@@ -25,5 +19,4 @@
                 <p>Année de sortie : ${work.release}</p>
             </div>
         </c:forEach>
-    </body>
-</html>
+

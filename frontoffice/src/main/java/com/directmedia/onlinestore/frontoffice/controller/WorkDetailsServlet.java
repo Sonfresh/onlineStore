@@ -8,7 +8,6 @@ package com.directmedia.onlinestore.frontoffice.controller;
 import com.directmedia.onlinestore.core.entity.Catalogue;
 import com.directmedia.onlinestore.core.entity.Work;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -78,7 +77,7 @@ public class WorkDetailsServlet extends HttpServlet {
             }
         }
         request.setAttribute("work", work);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/work-details.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/work-details.jsp");
         dispatcher.forward(request, response);
         /*PrintWriter out = response.getWriter();
         out.print("<html><body><h1 style='text-align:center;'>Descriptif de l'oeuvre</h1>");

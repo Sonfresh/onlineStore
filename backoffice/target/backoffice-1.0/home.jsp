@@ -9,21 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/application.js"></script>
         <title>Online Store</title>
     </head>
     <body>
-        <h1>OnlineStore - Gestion de la boutique</h1>
         <%
            String userName = (String)session.getAttribute("identifiantUser"); 
             if(userName != null){
                 %>
                 <h3>Bonjour ${identifiantUser} <a href='http://localhost:8080/backoffice-1.0/logout'>(Déconnexion)</a></h3>
-                    <a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a><br/>
-                    <a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a>
+                <a href='http://localhost:8080/backoffice-1.0/add-work-form.html'>Ajouter une œuvre au catalogue</a><br/>
+                    <a href='catalogue'>Afficher le catalogue des oeuvres</a><br/>
                 <%
             }else{
                 %>
-                    <a href='http://localhost:8080/backoffice-1.0/catalogue'>Accès au catalogue des oeuvres</a>
+                    <a href='catalogue'>Afficher le catalogue des oeuvres</a>
                 <%
             }
         %>
