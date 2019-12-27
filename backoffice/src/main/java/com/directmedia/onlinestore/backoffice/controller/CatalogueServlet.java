@@ -8,6 +8,7 @@ package com.directmedia.onlinestore.backoffice.controller;
 import com.directmedia.onlinestore.core.entity.Artist;
 import com.directmedia.onlinestore.core.entity.Catalogue;
 import com.directmedia.onlinestore.core.entity.Work;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  *
@@ -45,10 +47,13 @@ public class CatalogueServlet extends HttpServlet {
             Catalogue.listOfWorks.add(new Work("Warcraft : Le Commencement", 2016, new Artist("Travis Fimmel"), "Fantasy", "Draenor, le monde natal des Orcs, se meurt. Le sorcier démoniste Gul'dan unifie les tribus orcs au sein d’une Horde et use d’une puissante magie, le Fel (la Gangrène en VQ), afin d’ouvrir un portail vers Azeroth où une petite troupe de guerriers s’infiltre afin d’y réunir assez de prisonniers humains à sacrifier pour faire passer le restant de la Horde. ", "http://fr.web.img4.acsta.net/c_215_290/pictures/16/04/06/12/45/574116.jpg"));
         }
         
-        request.setAttribute("catalogue", Catalogue.listOfWorks);
-        RequestDispatcher dispacther = request.getRequestDispatcher("/WEB-INF/catalogue.jsp");
-        dispacther.forward(request, response);
-        
+        //request.setAttribute("catalogue", Catalogue.listOfWorks);
+        //RequestDispatcher dispacther = request.getRequestDispatcher("/WEB-INF/catalogue.jsp");
+        //dispacther.forward(request, response);
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(out, Catalogue.listOfWorks);
       
         //Object[] obj = Catalogue.listOfWorks.toArray();
         
