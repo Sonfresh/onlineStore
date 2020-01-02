@@ -24,7 +24,7 @@ public class Work {
     }
 
     public Work(String pTitle) {
-            this.title = pTitle;
+        this.title = pTitle;
     }
 
     public Work(String pTitle, int pRelease, Artist pMainArtist, String pGenre, String pSummary, String pUrlImg) {
